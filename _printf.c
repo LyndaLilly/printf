@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			/* Handle the '%' character followed by conversion specifier */
+			 /* Handle the '%' character followed by conversion specifier */
 			print_buffer(buffer, &buff_ind);
 			flags = get_flags(format, &i);
 			width = get_width(format, &i, list);
@@ -41,16 +41,17 @@ int _printf(const char *format, ...)
 			size = get_size(format, &i);
 			++i;
 			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
+					 flags, width, precision, size);
 			if (printed == -1)
 				return (-1);
-			printed_chars += printed;
+			 printed_chars += printed;
 		}
 	}
 
-	print_buffer(buffer, &buff_ind);
+	 va_end(list);
 
-	va_end(list);
+	/* print the remaining characters */
+	print_buffer(buffer, &buff_ind);
 
 	return (printed_chars);
 }
