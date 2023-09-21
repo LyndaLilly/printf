@@ -1,5 +1,4 @@
 #include "main.h"
-
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
@@ -15,7 +14,6 @@ int _printf(const char *format, ...)
 	va_list args_list;
 	char output_buffer[BUFF_SIZE];
 
-	/* Check if format string is NULL*/
 	if (format == NULL)
 		return (-1);
 
@@ -23,6 +21,7 @@ int _printf(const char *format, ...)
 
 	/* Loop through the characters in the format string */
 	for (char_idx = 0; format && format[char_idx] != '\0'; char_idx++)
+
 	{
 		if (format[char_idx] != '%')
 		{
@@ -41,10 +40,10 @@ int _printf(const char *format, ...)
 		{
 			 /* Handle the '%' character followed by conversion specifier */
 			print_buffer(output_buffer, &buf_idx);
-			spec_flags = parse_flags(format, &char_idx);
-			spec_width = parse_width(format, &char_idx, args_list);
-			spec_prec = parse_precision(format, &char_idx, args_list);
-			spec_size = parse_size(format, &char_idx);
+			spec_flags = get_flags(format, &char_idx);
+			spec_width = get_width(format, &char_idx, args_list);
+			spec_prec = get_precision(format, &char_idx, args_list);
+			spec_size = get_size(format, &char_idx);
 			char_idx++;
 			chars_printed = handle_print(format, &char_idx, args_list, output_buffer,
 					 spec_flags, spec_width, spec_prec, spec_size);
